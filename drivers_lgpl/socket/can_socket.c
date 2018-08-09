@@ -115,11 +115,11 @@ canSend_driver (CAN_HANDLE fd0, Message const * m)
 #if defined DEBUG_MSG_CONSOLE_ON
   MSG("out : ");
   print_message(m);
+  fprintf (stderr, "Send failed: %s\n", strerror (CAN_ERRNO (res)));
 #endif
   res = CAN_SEND (*(int *) fd0, &frame, sizeof (frame), 0);
   if (res < 0)
     {
-      fprintf (stderr, "Send failed: %s\n", strerror (CAN_ERRNO (res)));
       return 1;
     }
 
